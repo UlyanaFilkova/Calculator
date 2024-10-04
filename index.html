@@ -9,10 +9,14 @@
     <title>Калькулятор</title>
     <link
       rel="stylesheet"
+      href="src/css/default.css"
+    />
+    <link
+      rel="stylesheet"
       href="src/css/style.css"
     />
   </head>
-  <body>
+  <body class="">
     <main>
       <div class="grid">
         <div class="grid__result-window">0</div>
@@ -39,101 +43,103 @@
         <div class="grid__arithm">
           <button
             class="grid__arithm-btn"
-            data-operation=""
+            data-operation="/"
           >
             &divide;
           </button>
           <button
             class="grid__arithm-btn"
-            data-operation=""
+            data-operation="*"
           >
             &times;
           </button>
           <button
             class="grid__arithm-btn"
-            data-operation=""
+            data-operation="-"
           >
             &minus;
           </button>
           <button
             class="grid__arithm-btn"
-            data-operation=""
+            data-operation="+"
           >
             +
           </button>
           <button
             class="grid__arithm-btn"
-            data-operation=""
+            data-operation="="
           >
             =
           </button>
         </div>
-        <button
-          class="grid__number"
-          data-operation=""
-        >
-          7
-        </button>
-        <button
-          class="grid__number"
-          data-operation=""
-        >
-          8
-        </button>
-        <button
-          class="grid__number"
-          data-operation=""
-        >
-          9
-        </button>
-        <button
-          class="grid__number"
-          data-operation=""
-        >
-          4
-        </button>
-        <button
-          class="grid__number"
-          data-operation=""
-        >
-          5
-        </button>
-        <button
-          class="grid__number"
-          data-operation=""
-        >
-          6
-        </button>
-        <button
-          class="grid__number"
-          data-operation=""
-        >
-          1
-        </button>
-        <button
-          class="grid__number"
-          data-operation=""
-        >
-          2
-        </button>
-        <button
-          class="grid__number"
-          data-operation=""
-        >
-          3
-        </button>
-        <button
-          class="grid__number"
-          data-operation=""
-        >
-          0
-        </button>
-        <button
-          class="grid__number"
-          data-operation=""
-        >
-          ,
-        </button>
+        <div class="grid__numbers">
+          <button
+            class="grid__number-btn"
+            data-number="7"
+          >
+            7
+          </button>
+          <button
+            class="grid__number-btn"
+            data-number="8"
+          >
+            8
+          </button>
+          <button
+            class="grid__number-btn"
+            data-number="9"
+          >
+            9
+          </button>
+          <button
+            class="grid__number-btn"
+            data-number="4"
+          >
+            4
+          </button>
+          <button
+            class="grid__number-btn"
+            data-number="5"
+          >
+            5
+          </button>
+          <button
+            class="grid__number-btn"
+            data-number="6"
+          >
+            6
+          </button>
+          <button
+            class="grid__number-btn"
+            data-number="1"
+          >
+            1
+          </button>
+          <button
+            class="grid__number-btn"
+            data-number="2"
+          >
+            2
+          </button>
+          <button
+            class="grid__number-btn"
+            data-number="3"
+          >
+            3
+          </button>
+          <button
+            class="grid__number-btn"
+            data-number="0"
+          >
+            0
+          </button>
+          <button
+            class="grid__number-btn"
+            data-number=","
+          >
+            ,
+          </button>
+        </div>
       </div>
     </main>
     <script src="src/js/script.js"></script>

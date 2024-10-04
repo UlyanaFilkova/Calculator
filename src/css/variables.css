@@ -1,0 +1,22 @@
+:root {  
+  --var-window-bg-color: #ffffff;
+  --var-border-color: #c9bbbb;
+  --var-grid-bg-color: #eae2e2;
+  --var-arithm-color: #c9bbbb;
+  --var-func-color: #c9bbbb;
+  --var-number-color: #c9bbbb;
+  --var-font-color: #000;
+
+  --padding-small: 10px;
+  --padding-medium: 20px;
+  --padding-large: 30px;
+}
+
+/* .dark_mode{
+    --var-window-bg-color: #eba0a0;
+    --var-grid-bg-color:
+    --var-arithm-color:
+    --var-func-color:
+    --var-number-color:
+    --var-font-color: #000;
+} */
