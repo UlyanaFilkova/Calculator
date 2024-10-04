@@ -1,10 +1,11 @@
-:root {  
+:root {
   --var-window-bg-color: #ffffff;
   --var-border-color: #c9bbbb;
-  --var-grid-bg-color: #eae2e2;
-  --var-arithm-color: #c9bbbb;
-  --var-func-color: #c9bbbb;
-  --var-number-color: #c9bbbb;
+  --var-grid-bg-color: #438cd5;
+  --var-arithm-color: #68a8e7;
+  --var-func-color: #99c4f0;
+  --var-important-func-color: #fc7464;
+  --var-number-color: #e8f0f6;
   --var-font-color: #000;
 
   --padding-small: 10px;

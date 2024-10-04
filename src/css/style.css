@@ -14,11 +14,13 @@ main {
   display: grid;
   grid-template-columns: 3fr 1fr;
   grid-template-rows: 1.5fr 1fr 4fr;
-  gap: 1px;
+  gap: 2px;
 
   width: 56vh;
   height: 80vh;
-  background-color: var(--var-grid-bg-color);
+
+  font-size: 20px;
+  /* background-color: var(--var-grid-bg-color); */
 }
 
 .grid__result-window {
@@ -32,12 +34,16 @@ main {
 
   display: grid;
   grid-template-rows: 1fr;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 1px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
 }
 
 .grid__func-btn {
   background-color: var(--var-func-color);
+}
+
+.grid__func-btn[data-operation="clear"] {
+  background-color: var(--var-important-func-color);
 }
 
 .grid__arithm {
@@ -47,11 +53,11 @@ main {
   display: grid;
   grid-template-rows: repeat(5, 1fr);
   grid-template-columns: 1fr;
-  gap: 1px;
+  gap: 2px;
 }
 
 .grid__arithm-btn {
-  background-color: var(--var-func-color);
+  background-color: var(--var-arithm-color);
 }
 
 .grid__numbers {
@@ -61,13 +67,13 @@ main {
   display: grid;
   grid-template-rows: repeat(4, 1fr);
   grid-template-columns: repeat(3, 1fr);
-  gap: 1px;
+  gap: 2px;
 }
 
 .grid__number-btn {
-  background-color: var(--var-func-color);
+  background-color: var(--var-number-color);
 }
 
-button[data-number="0"] {
+.grid__number-btn[data-number="0"] {
   grid-column: 1/3;
 }
