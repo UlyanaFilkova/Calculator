@@ -1,20 +1,50 @@
-import calculate from "./calculate.js";
-
 const resultWindow = document.querySelector(".grid__result-window");
 const buttons = document.querySelectorAll(
   ".grid__func-btn, .grid__arithm-btn, .grid__number-btn"
 );
 
-let currentNumber = "";
-let previousNumber = "";
-let operation = "";
+const calculator = {
+  currentNumber: "",
+  previousNumber: "",
+  operation: "",
+};
 
-function stringToFloat(num) {
-  return num.replace(",", ".");
+function formatFloat(num, format) {
+  if (format === "float") {
+    return num.replace(",", ".");
+  } else {
+    return num.replace(".", ",");
+  }
 }
 
-function floatToString(num) {
-  return num.replace(".", ",");
+// используем toFixed() и replace(), чтобы разобраться с проблемой арифметики чисел с плавающей точкой
+// оставим 10 знаков после запятой, всё что дальше за ними - округлим
+// с помощью /0+$/ убираем нули после запятой, если за ними ничего не следует
+// а затем с помощью /\.$/ убираем саму запятую, если за ней ничего не следует
+function formatNumber(num) {
+  return num.toFixed(10).replace(/0+$/, "").replace(/\.$/, "");
+}
+
+function calculate(num1, operation, num2) {
+  let result = 0;
+  switch (operation) {
+    case "+":
+      result = parseFloat(num1) + parseFloat(num2);
+      break;
+    case "-":
+      result = parseFloat(num1) - parseFloat(num2);
+      break;
+    case "*":
+      result = parseFloat(num1) * parseFloat(num2);
+      break;
+    case "/":
+      result = parseFloat(num1) / parseFloat(num2);
+      break;
+    default:
+      return 0;
+  }
+
+  return formatNumber(result);
 }
 
 function handleButtonPress(event) {
@@ -23,77 +53,75 @@ function handleButtonPress(event) {
 
   switch (buttonType) {
     case "clear":
-      // Очищаем результат и переменные
-      resultWindow.textContent = "0";
-      currentNumber = "";
-      previousNumber = "";
-      operation = "";
+      clearCalculator();
       break;
     case "sign-change":
-      // Меняем знак текущего числа
-      currentNumber = currentNumber.startsWith("-")
-        ? currentNumber.slice(1)
-        : "-" + currentNumber;
-      resultWindow.textContent = currentNumber;
+      changeSign();
       break;
     case "percent":
-      // Выполняем операцию процента
-      currentNumber = (parseFloat(currentNumber) / 100.0).toString();
-      resultWindow.textContent = currentNumber;
+      calculatePercent();
       break;
     case "=":
-      // Выполняем арифметическую операцию
-      if (operation && previousNumber) {
-        const result = calculate(
-          stringToFloat(previousNumber),
-          operation,
-          stringToFloat(currentNumber)
-        );
-        resultWindow.textContent = floatToString(result.toString());
-        currentNumber = floatToString(result.toString());
-        previousNumber = "";
-        operation = "";
-      }
+      calculateResult();
       break;
     case "+":
     case "-":
     case "*":
     case "/":
-      // Запоминаем операцию и текущее число
-      operation = buttonType;
-      previousNumber = currentNumber;
-      currentNumber = "";
-      break;
-    case ",":
-      //   resultWindow.textContent += ",";
-      currentNumber += ",";
-      resultWindow.textContent = currentNumber;
+      handleOperationButton(buttonType);
       break;
     default:
-      // Добавляем цифру к текущему числу
-      currentNumber += buttonType;
-      resultWindow.textContent = currentNumber;
+      handleNumberButton(buttonType);
       break;
   }
 }
 
-// // Функция для выполнения арифметических операций
-// function calculate(num1, operation, num2) {
-//   switch (operation) {
-//     case "+":
-//       return parseFloat(num1) + parseFloat(num2);
-//     case "-":
-//       return parseFloat(num1) - parseFloat(num2);
-//     case "*":
-//       return parseFloat(num1) * parseFloat(num2);
-//     case "/":
-//       return parseFloat(num1) / parseFloat(num2);
-//     default:
-//       return 0;
-//   }
-// }
+function clearCalculator() {
+  calculator.currentNumber = "";
+  calculator.previousNumber = "";
+  calculator.operation = "";
+  resultWindow.textContent = "0";
+}
 
-// Добавляем обработчик нажатий кнопок
+function changeSign() {
+  calculator.currentNumber = calculator.currentNumber.startsWith("-")
+    ? calculator.currentNumber.slice(1)
+    : "-" + calculator.currentNumber;
+  resultWindow.textContent = calculator.currentNumber;
+}
+
+function calculatePercent() {
+  calculator.currentNumber = (
+    parseFloat(calculator.currentNumber) * 0.01
+  ).toString();
+  resultWindow.textContent = calculator.currentNumber;
+}
+
+function calculateResult() {
+  if (calculator.operation && calculator.previousNumber) {
+    const result = calculate(
+      formatFloat(calculator.previousNumber, "float"),
+      calculator.operation,
+      formatFloat(calculator.currentNumber, "float")
+    );
+    resultWindow.textContent = formatFloat(result.toString(), "string");
+    calculator.currentNumber = formatFloat(result.toString(), "string");
+    calculator.previousNumber = "";
+    calculator.operation = "";
+  }
+}
+
+function handleOperationButton(buttonType) {
+  calculator.operation = buttonType;
+  calculator.previousNumber = calculator.currentNumber;
+  calculator.currentNumber = "";
+}
+
+function handleNumberButton(buttonType) {
+  calculator.currentNumber += buttonType;
+  resultWindow.textContent = calculator.currentNumber;
+}
+
 buttons.forEach((button) => {
   button.addEventListener("click", handleButtonPress);
 });
