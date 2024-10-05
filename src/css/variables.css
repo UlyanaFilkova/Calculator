@@ -11,33 +11,11 @@
 
 .dark_mode {
   --var-bg-color: #1c1c1c;
-  --var-border-color: #a8a8a8;
+  --var-border-color: #bdbdbd;
   --var-light-bg-color: #343434;
   --var-dark-btn-color: #5e5e5e;
   --var-middle-btn-color: #212121;
   --var-important-btn-color: #a85a51;
   --var-light-btn-color: #343434;
-  --var-font-color: #c2c2c2;
+  --var-font-color: #d4d4d4;
 }
-
-/* :root {
-  --var-main-bg-color: #ffffff;
-  --var-border-color: #b2bdc8;
-  --var-grid-bg-color: #438cd5;
-  --var-result-bg-color: #fdfbfb;
-  --var-arithm-color: #68a8e7;
-  --var-func-color: #99c4f0;
-  --var-important-func-color: #fc7464;
-  --var-number-color: #f5f5f5;
-  /* --var-number-color: #e8f0f6; */
-/*--var-font-color: #000;
-} */
-
-/* .dark_mode{
-    --var-window-bg-color: #eba0a0;
-    --var-grid-bg-color:
-    --var-arithm-color:
-    --var-func-color:
-    --var-number-color:
-    --var-font-color: #000;
-} */
