@@ -1,12 +1,18 @@
 @import "variables.css";
 
+body {
+  overflow-x: hidden;
+}
 main {
   width: 100vw;
   min-height: 100vh;
   overflow-x: hidden;
   background-color: var(--var-bg-color);
   display: flex;
-  justify-content: center;
+  gap: 4vh;
+  padding-top: 4vh;
+  flex-direction: column;
+  justify-content: start;
   align-items: center;
 }
 
@@ -123,12 +129,34 @@ button {
 
 .change-theme-btn {
   background-color: #b9d7f5;
+  border: 1px solid #94c3f2;
   padding: 10px;
-  position: absolute;
-  top: 2vh;
-  left: 3vw;
+  border-radius: 5px;
+}
+
+.change-theme-btn:hover {
+  background-color: #94c3f2;
 }
 
 .change-theme-btn_dark {
   background-color: #5e5e5e;
+  border: 1px solid #444444;
+}
+
+.change-theme-btn_dark:hover {
+  background-color: #444444;
+}
+
+@media (max-width: 430px) {
+  .grid {
+    width: 88vw;
+    height: 129vw;
+    font-size: 8vw;
+  }
+  .grid__arithm-btn {
+    font-size: 10vw;
+  }
+  .change-theme-btn {
+    font-size: 7vw;
+  }
 }
