@@ -9,12 +9,11 @@ const calculator = {
   operation: "",
 };
 
-function formatFloat(num, format) {
-  if (format === "float") {
-    return num.replace(",", ".");
-  } else {
-    return num.replace(".", ",");
-  }
+function stringToFloat(str) {
+  return parseFloat(str.replace(",", "."));
+}
+function floatToString(num) {
+  return num.toString().replace(".", ",");
 }
 
 // используем toFixed() и replace(), чтобы разобраться с проблемой арифметики чисел с плавающей точкой
@@ -23,28 +22,6 @@ function formatFloat(num, format) {
 // а затем с помощью /\.$/ убираем саму запятую, если за ней ничего не следует
 function formatNumber(num) {
   return num.toFixed(10).replace(/0+$/, "").replace(/\.$/, "");
-}
-
-function calculate(num1, operation, num2) {
-  let result = 0;
-  switch (operation) {
-    case "+":
-      result = parseFloat(num1) + parseFloat(num2);
-      break;
-    case "-":
-      result = parseFloat(num1) - parseFloat(num2);
-      break;
-    case "*":
-      result = parseFloat(num1) * parseFloat(num2);
-      break;
-    case "/":
-      result = parseFloat(num1) / parseFloat(num2);
-      break;
-    default:
-      return 0;
-  }
-
-  return formatNumber(result);
 }
 
 function handleButtonPress(event) {
@@ -91,21 +68,47 @@ function changeSign() {
 }
 
 function calculatePercent() {
-  calculator.currentNumber = (
-    parseFloat(calculator.currentNumber) * 0.01
-  ).toString();
+  calculator.currentNumber = floatToString(
+    stringToFloat(calculator.currentNumber) * 0.01
+  );
   resultWindow.textContent = calculator.currentNumber;
 }
 
+function calculate(num1, operation, num2) {
+  let result = 0;
+  switch (operation) {
+    case "+":
+      result = num1 + num2;
+      break;
+    case "-":
+      result = num1 - num2;
+      break;
+    case "*":
+      result = num1 * num2;
+      break;
+    case "/":
+      result = num1 / num2;
+      break;
+    default:
+      return 0;
+  }
+
+  return formatNumber(result);
+}
+
 function calculateResult() {
-  if (calculator.operation && calculator.previousNumber) {
+  if (
+    calculator.operation &&
+    calculator.previousNumber &&
+    calculator.currentNumber
+  ) {
     const result = calculate(
-      formatFloat(calculator.previousNumber, "float"),
+      stringToFloat(calculator.previousNumber),
       calculator.operation,
-      formatFloat(calculator.currentNumber, "float")
+      stringToFloat(calculator.currentNumber)
     );
-    resultWindow.textContent = formatFloat(result.toString(), "string");
-    calculator.currentNumber = formatFloat(result.toString(), "string");
+    resultWindow.textContent = floatToString(result);
+    calculator.currentNumber = floatToString(result);
     calculator.previousNumber = "";
     calculator.operation = "";
   }
@@ -119,6 +122,9 @@ function handleOperationButton(buttonType) {
 
 function handleNumberButton(buttonType) {
   calculator.currentNumber += buttonType;
+  if (calculator.currentNumber === ",") {
+    calculator.currentNumber = "0,";
+  }
   resultWindow.textContent = calculator.currentNumber;
 }
 
