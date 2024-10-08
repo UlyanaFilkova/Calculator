@@ -60,8 +60,16 @@ button {
   background-color: var(--var-middle-btn-color);
 }
 
+.grid__func-btn:hover {
+  background-color: var(--var-middle-btn-color-hover);
+}
+
 .grid__func-btn[data-operation="clear"] {
   background-color: var(--var-important-btn-color);
+}
+
+.grid__func-btn[data-operation="clear"]:hover {
+  background-color: var(--var-important-btn-color-hover);
 }
 
 .grid__arithm {
@@ -83,6 +91,10 @@ button {
   border-radius: 0 0 10px 0;
 }
 
+.grid__arithm-btn:hover {
+  background-color: var(--var-dark-btn-color-hover);
+}
+
 .grid__numbers {
   grid-column: 1 / 2;
   grid-row: 3 / 4;
@@ -95,6 +107,10 @@ button {
 
 .grid__number-btn {
   background-color: var(--var-light-btn-color);
+}
+
+.grid__number-btn:hover {
+  background-color: var(--var-light-btn-color-hover);
 }
 
 .grid__number-btn[data-number="0"] {
