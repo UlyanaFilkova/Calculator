@@ -151,3 +151,11 @@ function handleNumberButton(buttonType) {
 buttons.forEach((button) => {
   button.addEventListener("click", handleButtonPress);
 });
+
+const changeThemeButton = document.getElementById("change-theme-btn");
+changeThemeButton.onclick = (e) => {
+  e.preventDefault();
+  const body = document.getElementsByTagName("body")[0];
+  body.classList.toggle("dark_mode");
+  changeThemeButton.classList.toggle("change-theme-btn_dark");
+};

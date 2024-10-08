@@ -120,3 +120,15 @@ button {
 .grid__number-btn:nth-last-child(2) {
   border-radius: 0 0 0 10px;
 }
+
+.change-theme-btn {
+  background-color: #b9d7f5;
+  padding: 10px;
+  position: absolute;
+  top: 2vh;
+  left: 3vw;
+}
+
+.change-theme-btn_dark {
+  background-color: #5e5e5e;
+}
