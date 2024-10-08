@@ -3,16 +3,23 @@ const buttons = document.querySelectorAll(
   ".grid__func-btn, .grid__arithm-btn, .grid__number-btn"
 );
 
+// максимальное число символов
+const MAX_LENGTH = 16;
+const MAX_LENGTH_AFTER_DECIMAL_POINT = 10;
+
 const calculator = {
   currentNumber: "",
   previousNumber: "",
   operation: "",
 };
 
+// функции для форматирования ввода и вывода
 function stringToFloat(str) {
   return parseFloat(str.replace(",", "."));
 }
+
 function floatToString(num) {
+  if (num === "NaN" || num === "Infinity") return "0";
   return num.toString().replace(".", ",");
 }
 
@@ -20,8 +27,11 @@ function floatToString(num) {
 // оставим 10 знаков после запятой, всё что дальше за ними - округлим
 // с помощью /0+$/ убираем нули после запятой, если за ними ничего не следует
 // а затем с помощью /\.$/ убираем саму запятую, если за ней ничего не следует
-function formatNumber(num) {
-  return num.toFixed(10).replace(/0+$/, "").replace(/\.$/, "");
+function formatFloat(num) {
+  return num
+    .toFixed(MAX_LENGTH_AFTER_DECIMAL_POINT)
+    .replace(/0+$/, "")
+    .replace(/\.$/, "");
 }
 
 function handleButtonPress(event) {
@@ -69,9 +79,27 @@ function changeSign() {
 
 function calculatePercent() {
   calculator.currentNumber = floatToString(
-    stringToFloat(calculator.currentNumber) * 0.01
+    formatFloat(stringToFloat(calculator.currentNumber) * 0.01)
   );
   resultWindow.textContent = calculator.currentNumber;
+}
+
+function calculateResult() {
+  if (
+    calculator.operation &&
+    calculator.previousNumber &&
+    calculator.currentNumber
+  ) {
+    const result = calculate(
+      stringToFloat(calculator.previousNumber),
+      calculator.operation,
+      stringToFloat(calculator.currentNumber)
+    );
+    resultWindow.textContent = floatToString(result);
+    calculator.currentNumber = floatToString(result);
+    calculator.previousNumber = "";
+    calculator.operation = "";
+  }
 }
 
 function calculate(num1, operation, num2) {
@@ -93,25 +121,7 @@ function calculate(num1, operation, num2) {
       return 0;
   }
 
-  return formatNumber(result);
-}
-
-function calculateResult() {
-  if (
-    calculator.operation &&
-    calculator.previousNumber &&
-    calculator.currentNumber
-  ) {
-    const result = calculate(
-      stringToFloat(calculator.previousNumber),
-      calculator.operation,
-      stringToFloat(calculator.currentNumber)
-    );
-    resultWindow.textContent = floatToString(result);
-    calculator.currentNumber = floatToString(result);
-    calculator.previousNumber = "";
-    calculator.operation = "";
-  }
+  return formatFloat(result);
 }
 
 function handleOperationButton(buttonType) {
@@ -121,7 +131,17 @@ function handleOperationButton(buttonType) {
 }
 
 function handleNumberButton(buttonType) {
-  calculator.currentNumber += buttonType;
+  if (calculator.currentNumber.length >= MAX_LENGTH) {
+    return;
+  }
+  if (buttonType === "," && calculator.currentNumber.includes(",")) {
+    return;
+  }
+  if (calculator.currentNumber === "0") {
+    calculator.currentNumber = buttonType;
+  } else {
+    calculator.currentNumber += buttonType;
+  }
   if (calculator.currentNumber === ",") {
     calculator.currentNumber = "0,";
   }
