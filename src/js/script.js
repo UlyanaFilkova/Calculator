@@ -120,17 +120,26 @@ function handleNumberButton(buttonType) {
   if (calculator.currentNumber.length >= MAX_LENGTH) {
     return;
   }
+
   if (buttonType === "," && calculator.currentNumber.includes(",")) {
+    // нельзя дважды вводить запятую
     return;
   }
+  if (calculator.currentNumber === "-0" && buttonType != ",") {
+    // число не может начинаться с 0, если за ним не следует запятая. Оставим только минус
+    calculator.currentNumber = "-";
+  }
+
   if (calculator.currentNumber === "0") {
     calculator.currentNumber = buttonType;
   } else {
     calculator.currentNumber += buttonType;
   }
   if (calculator.currentNumber === ",") {
+    // если была введена только запятая, добавим перед ней 0
     calculator.currentNumber = "0,";
   }
+
   resultWindow.textContent = calculator.currentNumber;
 }
 
