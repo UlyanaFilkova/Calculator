@@ -22,3 +22,9 @@ npm install
 npm run build
 npm run start
 ```
+## Project Structure
+**src/** - the source, uncompiled code of the application
+
+**src/js/** - JavaScript files, application logic and functionality
+
+**src/css** - CSS files, visual styling and layout definitions
