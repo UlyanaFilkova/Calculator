@@ -19,7 +19,9 @@ main {
 .grid {
   display: grid;
   grid-template-columns: 3fr 1fr;
-  grid-template-rows: 1.5fr 1fr 4fr;
+  /* grid-template-rows: 1.5fr 1fr 4fr; */
+  grid-template-rows: 23% 1fr 4fr;
+
   gap: 2px;
 
   width: 56vh;
@@ -57,7 +59,6 @@ button {
   grid-row: 2 / 3;
 
   display: grid;
-  /* grid-template-rows: 1fr; */
   grid-template-columns: repeat(3, 1fr);
   gap: 2px;
 }
@@ -84,7 +85,6 @@ button {
 
   display: grid;
   grid-template-rows: repeat(5, 1fr);
-  /* grid-template-columns: 1fr; */
   gap: 2px;
 }
 
@@ -157,6 +157,6 @@ button {
     font-size: 10vw;
   }
   .change-theme-btn {
-    font-size: 7vw;
+    font-size: 6vw;
   }
 }

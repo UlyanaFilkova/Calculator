@@ -1,0 +1,10 @@
+{
+  "parser": "@babel/eslint-parser",
+  "rules": {
+    "max-len": [1, 80, 2, { "ignoreComments": true }],
+  },
+  "parserOptions": {
+    "requireConfigFile": false,
+  },
+  "plugins": ["prettier/recommended"],
+}

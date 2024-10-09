@@ -1,38 +1,24 @@
+import "../css/default.css";
+import "../css/style.css";
+
+import {
+  MAX_LENGTH,
+  MAX_LENGTH_AFTER_DECIMAL_POINT,
+  stringToFloat,
+  floatToString,
+  formatFloat,
+} from "./utils";
+
 const resultWindow = document.querySelector(".grid__result-window");
 const buttons = document.querySelectorAll(
-  ".grid__func-btn, .grid__arithm-btn, .grid__number-btn"
+  ".grid__func-btn, .grid__arithm-btn, .grid__number-btn",
 );
-
-// максимальное число символов
-const MAX_LENGTH = 16;
-const MAX_LENGTH_AFTER_DECIMAL_POINT = 10;
 
 const calculator = {
   currentNumber: "",
   previousNumber: "",
   operation: "",
 };
-
-// функции для форматирования ввода и вывода
-function stringToFloat(str) {
-  return parseFloat(str.replace(",", "."));
-}
-
-function floatToString(num) {
-  if (num === "NaN" || num === "Infinity") return "0";
-  return num.toString().replace(".", ",");
-}
-
-// используем toFixed() и replace(), чтобы разобраться с проблемой арифметики чисел с плавающей точкой
-// оставим 10 знаков после запятой, всё что дальше за ними - округлим
-// с помощью /0+$/ убираем нули после запятой, если за ними ничего не следует
-// а затем с помощью /\.$/ убираем саму запятую, если за ней ничего не следует
-function formatFloat(num) {
-  return num
-    .toFixed(MAX_LENGTH_AFTER_DECIMAL_POINT)
-    .replace(/0+$/, "")
-    .replace(/\.$/, "");
-}
 
 function handleButtonPress(event) {
   const button = event.target;
@@ -79,7 +65,7 @@ function changeSign() {
 
 function calculatePercent() {
   calculator.currentNumber = floatToString(
-    formatFloat(stringToFloat(calculator.currentNumber) * 0.01)
+    formatFloat(stringToFloat(calculator.currentNumber) * 0.01),
   );
   resultWindow.textContent = calculator.currentNumber;
 }
@@ -93,7 +79,7 @@ function calculateResult() {
     const result = calculate(
       stringToFloat(calculator.previousNumber),
       calculator.operation,
-      stringToFloat(calculator.currentNumber)
+      stringToFloat(calculator.currentNumber),
     );
     resultWindow.textContent = floatToString(result);
     calculator.currentNumber = floatToString(result);
